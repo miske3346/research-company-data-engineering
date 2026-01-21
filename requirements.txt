@@ -1,0 +1,16 @@
+# Research Analytics ETL Pipeline
+# Python Dependencies
+
+# Data manipulation and analysis
+pandas>=2.0.0
+numpy>=1.24.0
+
+# Excel file handling
+openpyxl>=3.1.0
+
+# PostgreSQL connectivity (optional)
+psycopg2-binary>=2.9.0
+
+# For future enhancements
+# pytest>=7.0.0  # Unit testing
+# python-dotenv>=1.0.0  # Environment variables
