@@ -2,7 +2,7 @@
 
 @section('content')
 
-<form action="{{ route('register') }}" method="POST">
+<form action="{{ route('register') }}" enctype="multipart/form-data" method="POST">
 
 @csrf
 
@@ -73,12 +73,12 @@
 											<label class="col-sm-4 col-form-label">{{ __('ri7ab.Gender') }}</label>
 											<div class="col-sm-8">
 												<div class="custom-control custom-radio custom-control-inline pb-0">
-													<input type="radio" id="male" name="sex" class="custom-control-input">
-													<label class="custom-control-label" for="male">{{ __('ri7ab.Man') }}</label>
+													<input type="radio" id="{{ __('ri7ab.Man') }}" name="sex" class="custom-control-input">
+													<label class="custom-control-label" for="{{ __('ri7ab.Man') }}">{{ __('ri7ab.Man') }}</label>
 												</div>
 												<div class="custom-control custom-radio custom-control-inline pb-0">
-													<input type="radio" id="female" name="sex" value="Male" class="custom-control-input">
-													<label class="custom-control-label" for="female">{{ __('ri7ab.Women') }}</label>
+													<input type="radio" id="{{ __('ri7ab.Women') }}" name="sex" value="Male" class="custom-control-input">
+													<label class="custom-control-label" for="{{ __('ri7ab.Women') }}">{{ __('ri7ab.Women') }}</label>
 												</div>
 											</div>
 										</div>
@@ -129,7 +129,7 @@
                                             </div>
 
                                             <div class="input-group custom">
-                                                <input type="text" name="location" class="form-control form-control-lg" placeholder="{{ __('ri7ab.address') }}">
+                                                <input type="text" name="address" class="form-control form-control-lg" placeholder="{{ __('ri7ab.address') }}">
                                                 <div class="input-group-append custom">
                                                     <span class="input-group-text"><i class="icon-copy dw dw-user"></i></span>
                                                 </div>
@@ -172,7 +172,6 @@
 											@enderror
 											
 										</div>
-
 										
 										<div class="input-group">
 											<input placeholder="{{ __('ri7ab.confirm_passwd') }}" name="password_confirmation" type="password" class="form-control form-control-lg" required autocomplete="new-password" />
@@ -188,65 +187,36 @@
 								<h5>Contact Methode & Info</h5>
 								<section>
 									<div class="form-wrap max-width-600 mx-auto">
-										<div class="form-group row">
-											<label class="col-sm-4 col-form-label">Credit Card Type</label>
+
+
+									<div class="input-group custom">
+									
+									<div id="cover_preveiw" class="img-thumbnail"></div>
+
+									<input type="file" name="ri7ab" id="img" class="custom-file-input preview-item" data-preview-place="#cover_preveiw" accept="image/*">
+									<label class="custom-file-label" for="img">{{ __('ri7ab.profile_picture') }}</label>
+                                    
+									</div>
+									
+
+									<div class="input-group">
+											<label class="col-sm-4 col-form-label">{{ __('ri7ab.contact_method') }}</label>
 											<div class="col-sm-8">
-												<select class="form-control selectpicker" title="Select Card Type">
-													<option value="1">Option 1</option>
-													<option value="2">Option 2</option>
-													<option value="3">Option 3</option>
+												<select name="contact_method" class="form-control selectpicker" title="{{ __('ri7ab.contact_method')}}">
+													<option value="WhatsApp">Whatsapp</option>
+													<option value="SMS">SMS</option>
+													<option value="Touts">Touts</option>
 												</select>
 											</div>
-										</div>
-										<div class="form-group row align-items-center">
-											<label class="col-sm-4 col-form-label">Credit Card Number</label>
+									</div>
+										<div class="input-group">
+											<label class="col-sm-4 col-form-label">{{ __('ri7ab.contact_time') }}</label>
 											<div class="col-sm-8">
-												<input type="text" class="form-control">
-											</div>
-										</div>
-										<div class="form-group row">
-											<label class="col-sm-4 col-form-label">CVC</label>
-											<div class="col-sm-3">
-												<input type="text" class="form-control">
-											</div>
-										</div>
-										<div class="form-group row">
-											<label class="col-sm-4 col-form-label">Expiration Date</label>
-											<div class="col-sm-8">
-												<div class="row">
-													<div class="col-6">
-														<select class="form-control selectpicker" title="Month" data-size="5">
-															<option value='01'>January</option>
-															<option value='02'>February</option>
-															<option value='03'>March</option>
-															<option value='04'>April</option>
-															<option value='05'>May</option>
-															<option value='06'>June</option>
-															<option value='07'>July</option>
-															<option value='08'>August</option>
-															<option value='09'>September</option>
-															<option value='10'>October</option>
-															<option value='11'>November</option>
-															<option value='12'>December</option>
+														<select name="contact_time" class="form-control selectpicker" title="{{ __('ri7ab.contact_time') }}">
+															<option value='24h'>24h/24h</option>
+															<option value='8h-15h'>De 8h à 15h</option>
+															<option value='15h-23h'>De 15h à 23h</option>
 														</select>
-													</div>
-													<div class="col-6">
-														<select class="form-control selectpicker" title="Year" data-size="5">
-															<option>2020</option>
-															<option>2019</option>
-															<option>2018</option>
-															<option>2017</option>
-															<option>2016</option>
-															<option>2015</option>
-															<option>2014</option>
-															<option>2013</option>
-															<option>2012</option>
-															<option>2011</option>
-															<option>2010</option>
-															<option>2009</option>
-														</select>
-													</div>
-												</div>
 											</div>
 										</div>
 									</div>
@@ -313,6 +283,20 @@ $(document).ready(function () {
         }
 
     });
+
+	var imgPreview = function (input, reader_place) {
+
+	var reader = new FileReader();
+	reader.onload = function (e) {
+		$(reader_place).html($($.parseHTML('<img>')).addClass('img-editing img-thumbnail').attr('src', e.target.result));
+	};
+	reader.readAsDataURL(input.files[0]);
+	};
+
+	$('.preview-item').on('change', function () {
+	imgPreview(this, $(this).attr('data-preview-place'));
+	});
+
 });
 
 </script>

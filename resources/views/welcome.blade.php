@@ -54,7 +54,7 @@
                 @if (Route::has('login'))
                <ul class="navbar-nav ms-auto pt-2 pt-lg-0">
                      @auth
-                        <li class="nav-item"><a class="nav-link fw-medium active" href="{{ url('/dashboard') }}">Admin</a></li>
+                        <li class="nav-item"><a class="nav-link fw-medium active" href="{{ url('/blood') }}">Mon Compte</a></li>
                     @else
 
                       <li class="nav-item" data-anchor="data-anchor"><a class="nav-link fw-medium active" aria-current="page" href="#home">Home</a></li>
@@ -674,6 +674,25 @@
     <script src="vendors/is/is.min.js"></script>
     <script src="https://polyfill.io/v3/polyfill.min.js?features=window.scroll"></script>
     <script src="{{ asset('landing/assets/js/theme.js"></script>
+<script>
+      let search = (q) => {
+		fetch('/'+ route + '/partial/?q=' + q.target.value)
+        .then(response => response.text())
+        .then(html => {
+        document.querySelector('div#partial').innerHTML = html
+        });
+	}
+	
+	document.querySelector("#SearchBox").addEventListener("keypress", function (e) {
+        search(e);
+	});
+	
+	document.querySelector("#SearchBox").addEventListener("search", function (k) {
+		return search(k);
+	});
+
+}
+</script>
 
     <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,200;1,300;1,400&amp;display=swap" rel="stylesheet">
   </body>

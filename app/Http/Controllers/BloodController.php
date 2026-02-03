@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Don;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 
 class BloodController extends Controller
@@ -23,6 +25,9 @@ class BloodController extends Controller
      */
     public function index()
     {
-        return view('home');
+
+        $notifications = Auth::user()->Dons;
+
+        return view('home',compact('notifications'));
     }
 }

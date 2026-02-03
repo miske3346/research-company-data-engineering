@@ -49,6 +49,10 @@ class User extends Authenticatable
             return $this->hasMany(Event::class);
         }
 
+        public function dons() {
+            return $this->hasMany(Don::class);
+        }
+
         public function hasVerifiedPhone() {
             return ! is_null($this->phone_verified_at);
         }

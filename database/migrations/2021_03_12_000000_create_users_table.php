@@ -21,6 +21,7 @@ class CreateUsersTable extends Migration
             $table->timestamp('phone_verified_at')->nullable();
             $table->string('password');
             $table->string('role')->nullable(); // Donneur - Organisation
+            $table->string('image')->nullable();
             $table->boolean('is_active')->default(1);
             $table->boolean('is_admin')->default(0);
             $table->rememberToken();

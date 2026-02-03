@@ -5,12 +5,17 @@ return [
     'SignIn' => 'Se connecter',
     'Login' => 'Connexion',
     'Register' => 'S’inscrire',
+    'Logout' => 'Se déconnecter',
 
     'blood_type' => 'Type de sang',
 
     'nif' => 'NIF',
     'address' => 'La rue',
     'location' => 'Adresse de bureau',
+
+    'contact_method' => 'Méthode de contact',
+    'contact_time' => 'heure du contact',
+    'profile_picture' => 'Photo personnelle',
 
     'about' => 'À propos de la fondation',
     'phone' => 'Numéro de tél',

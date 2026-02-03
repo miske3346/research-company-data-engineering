@@ -63,10 +63,20 @@ class RegisterController extends Controller
 
         public function register(Request $request) {
         
+            $fileName = null;
+            if (request()->hasFile('ri7ab')) {
+                $file = request()->file('ri7ab');
+                $fileName = md5($file->getClientOriginalName() . time()) . "." . $file->getClientOriginalExtension();
+                $file->move(public_path('/storage/users'), $fileName);
+            }
+
+            dd($fileName);
+            
             // Prepare Linear User Values :p
             $data = [
                 'phone' => $request['phone'],
                 'role' => $request['role'],
+                'picture' => $fileName,
                 'password' => Hash::make($request['password'])
             ];
 
@@ -85,6 +95,8 @@ class RegisterController extends Controller
                     'group_id' => $request['blood'],
                     'date_naissance' => $request['birth_date'],
                     'place_naissance' => $request['birth_place'],
+                    'contact_methode' => $request['contact_method'],
+                    'contact_time' => $request['contact_time'],
                     'user_id' => $user->id
                 ]);
 
@@ -121,6 +133,7 @@ class RegisterController extends Controller
         return Validator::make($data, [
             'name' => ['required', 'string', 'max:255'],
             'phone' => ['required', 'integer', 'unique:users'],
+            'ri7ab' => 'required|image|mimes:jpg,jpeg,png,gif',
             'password' => ['required', 'string', 'min:8', 'confirmed'],
         ]);
     }

@@ -20,4 +20,6 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/blood', 'BloodController@index')->name('blood');
+Route::get('/profile', 'BloodController@profile')->name('profile');
+Route::get('/setting', 'BloodController@setting')->name('setting');
 
